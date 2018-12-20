@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from './data.service';
+import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,8 @@ import { DataService } from './data.service';
 export class AppComponent {
   title;
   jobs;
+  myBool: boolean = true;
+  searchBox: string;
   data = {
     title: 'Money Man',
     age: 42,
@@ -20,16 +23,17 @@ export class AppComponent {
 
   getValues() {}
 
-  showData() {
-    this.dataService.getData().subscribe(
-      data => {
-        this.jobs = data[0];
-      },
-      () => console.log(this.jobs),
-    );
+  showData(): void {
+    this.dataService.getData().subscribe(data => {
+      return (this.jobs = data);
+    });
   }
 
-  getTitle() {
+  getTitle(): string {
     return (this.title = 'USA Jobs');
+  }
+
+  hideStuff(): void {
+    this.myBool = !this.myBool;
   }
 }

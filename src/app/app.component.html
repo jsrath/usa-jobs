@@ -6,6 +6,12 @@
 
   <button (click)="showData()">Click Me</button>
 
+  <input type="text" name="searchBox" [(ngModel)]="searchBox">
+
   <div id="data">{{jobs}}</div>
+
+  <button (click)="hideStuff()">Hide Stuff</button>
+
+  <p *ngIf="myBool">{{searchBox}}</p>
 
 </div>
