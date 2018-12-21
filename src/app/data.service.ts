@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -7,9 +7,11 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class DataService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: Http) {}
   url = 'https://jobs.search.gov/jobs/search.json?query=nursing+jobs+with+veterans+affairs+in+albany+ny';
   getData(): Observable<any> {
-    return this.http.get(this.url).map((response: Response) => response.json());
+    return this.http.get(this.url).map((response: Response) => {
+      return response.json();
+    });
   }
 }
