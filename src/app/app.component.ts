@@ -1,35 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from './data.service';
+import { JobPost } from './data.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
-  title;
-  jobs;
-  myBool: boolean = true;
+export class AppComponent implements OnInit {
+  breakpoint: number;
+  jobs: JobPost[];
   searchBox: string;
-  data = {
-    title: 'Money Man',
-    age: 42,
-    gender: 'male',
-  };
 
   constructor(private dataService: DataService) {}
 
-  getValues() {}
-
-  showData(): void {
+  ngOnInit() {
     this.dataService.getData().subscribe(data => (this.jobs = data));
+    this.breakpoint = window.innerWidth <= 900 ? 1 : 4;
   }
 
-  getTitle(): string {
-    return (this.title = 'USA Jobs');
-  }
-
-  hideStuff(): void {
-    this.myBool = !this.myBool;
+  onResize(event) {
+    this.breakpoint = event.target.innerWidth <= 900 ? 1 : 4;
   }
 }

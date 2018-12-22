@@ -1,29 +1,16 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ data.title }}!
-  </h1>
+<mat-toolbar>
+  <mat-icon>build</mat-icon>
+  <span>USA JOBS</span>
+</mat-toolbar>
+<input type="text" name="searchBox" [(ngModel)]="searchBox">
 
-  <button (click)="showData()">Click Me</button>
-
-  <input type="text" name="searchBox" [(ngModel)]="searchBox">
-
-  <mat-grid-list cols="4" rowHeight="200px">
-    <mat-grid-tile *ngFor="let job of jobs">
-      <mat-card>
-        <mat-card-title>{{job.position_title}}</mat-card-title>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
-
-  <button (click)="hideStuff()">Hide Stuff</button>
-
-  <p *ngIf="myBool">{{searchBox}}</p>
-
-</div>
-
-
-
-<mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="tile.color">
-  {{tile.text}}
-</mat-grid-tile>
+<mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="200px">
+  <mat-grid-tile *ngFor="let job of jobs">
+    <mat-card>
+      <mat-card-title>{{job.position_title}}</mat-card-title>
+      <mat-card-content>
+        <p>{{job.locations[0]}}</p>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

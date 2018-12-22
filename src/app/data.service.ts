@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-interface JobPost {
+export interface JobPost {
   id: string;
   position_title: string;
   organization_name: string;
@@ -19,8 +19,9 @@ interface JobPost {
   providedIn: 'root',
 })
 export class DataService {
-  constructor(private http: HttpClient) {}
   url = 'https://jobs.search.gov/jobs/search';
+
+  constructor(private http: HttpClient) {}
 
   getData(): Observable<JobPost[]> {
     return this.http.get<JobPost[]>(this.url);

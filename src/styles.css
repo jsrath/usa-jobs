@@ -5,3 +5,9 @@ mat-card {
   width: 80%;
   min-height: 100px;
 }
+
+mat-menu {
+  background-color: #000;
+  height: 50px;
+  width: 100px;
+}

@@ -6,12 +6,25 @@ import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, HttpClientModule, FormsModule, NoopAnimationsModule, MatCardModule, MatGridListModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    NoopAnimationsModule,
+    MatCardModule,
+    MatGridListModule,
+    MatMenuModule,
+    MatIconModule,
+    MatToolbarModule,
+  ],
   providers: [DataService],
   bootstrap: [AppComponent],
 })
