@@ -1,8 +1,9 @@
 <mat-toolbar>
-  <mat-icon>build</mat-icon>
-  <span>USA JOBS</span>
+  <mat-icon>work</mat-icon>
+  <span>USA Jobs</span>
+  <input type="text" name="searchBox" [(ngModel)]="searchBox">
 </mat-toolbar>
-<input type="text" name="searchBox" [(ngModel)]="searchBox">
+
 
 <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="200px">
   <mat-grid-tile *ngFor="let job of jobs">
