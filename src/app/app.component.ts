@@ -22,9 +22,7 @@ export class AppComponent {
   getValues() {}
 
   showData(): void {
-    this.dataService.getData().subscribe(data => {
-      return (this.jobs = data);
-    });
+    this.dataService.getData().subscribe(data => (this.jobs = data));
   }
 
   getTitle(): string {

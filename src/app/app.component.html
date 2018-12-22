@@ -8,10 +8,22 @@
 
   <input type="text" name="searchBox" [(ngModel)]="searchBox">
 
-  <div id="data">{{jobs}}</div>
+  <mat-grid-list cols="4" rowHeight="200px">
+    <mat-grid-tile *ngFor="let job of jobs">
+      <mat-card>
+        <mat-card-title>{{job.position_title}}</mat-card-title>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
 
   <button (click)="hideStuff()">Hide Stuff</button>
 
   <p *ngIf="myBool">{{searchBox}}</p>
 
 </div>
+
+
+
+<mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="tile.color">
+  {{tile.text}}
+</mat-grid-tile>
