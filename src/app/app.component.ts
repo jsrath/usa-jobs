@@ -12,14 +12,15 @@ export class AppComponent implements OnInit {
   jobs: JobPost[];
   searchBox: string;
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.dataService.getData().subscribe(data => (this.jobs = data));
-    this.breakpoint = window.innerWidth <= 900 ? 1 : 4;
+    this.breakpoint = window.innerWidth <= 900 ? 1 : 3;
   }
 
   onResize(event) {
-    this.breakpoint = event.target.innerWidth <= 900 ? 1 : 4;
+    this.breakpoint = event.target.innerWidth <= 900 ? 1 : 3;
   }
+
 }

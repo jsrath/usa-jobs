@@ -1,16 +1,26 @@
-<mat-toolbar>
+<mat-toolbar color="primary">
   <mat-icon>work</mat-icon>
   <span>USA Jobs</span>
   <input type="text" name="searchBox" [(ngModel)]="searchBox">
 </mat-toolbar>
 
 
-<mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="200px">
+<mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="250px">
   <mat-grid-tile *ngFor="let job of jobs">
     <mat-card>
-      <mat-card-title>{{job.position_title}}</mat-card-title>
+      <mat-card-title class="mat-primary">{{job.position_title}}</mat-card-title>
       <mat-card-content>
-        <p>{{job.locations[0]}}</p>
+        <p *ngFor="let location of job.locations; let i = index">
+          {{ i < 2 ? location : null }}</p> <mat-chip-list>
+            <mat-chip color="primary" selected *ngIf="job.locations.length > 2">+{{job.locations.length
+              -2}}
+              more locations
+            </mat-chip>
+            <mat-chip color="accent" selected>
+              <mat-icon>attach_money</mat-icon>{{job.minimum | currency:'USD':true:"1.0"}} - {{job.maximum | number}}
+            </mat-chip>
+            </mat-chip-list>
+
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>
