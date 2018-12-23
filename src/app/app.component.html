@@ -10,14 +10,15 @@
     <mat-card>
       <mat-card-title class="mat-primary">{{job.position_title}}</mat-card-title>
       <mat-card-content>
-        <p *ngFor="let location of job.locations; let i = index">
-          {{ i < 2 ? location : null }}</p> <mat-chip-list>
+        <span *ngFor="let location of job.locations; let i = index">
+          | {{ i < 2 ? location : null }}</span> <mat-chip-list>
             <mat-chip color="primary" selected *ngIf="job.locations.length > 2">+{{job.locations.length
               -2}}
               more locations
             </mat-chip>
             <mat-chip color="accent" selected>
-              <mat-icon>attach_money</mat-icon>{{job.minimum | currency:'USD':true:"1.0"}} - {{job.maximum | number}}
+              <mat-icon>attach_money</mat-icon>{{job.minimum | currency:'USD':true:"1.0"}} - {{job.maximum |
+              currency:'USD':true:"1.0"}}
             </mat-chip>
             </mat-chip-list>
 
