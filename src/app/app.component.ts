@@ -9,6 +9,7 @@ import { JobPost } from './data.service';
 })
 export class AppComponent implements OnInit {
   breakpoint: number;
+  logo: string = '../assets/logo.svg'
   jobs: JobPost[];
   searchBox: string;
   url: string = 'https://jobs.search.gov/jobs/search.json?size=50&query='
@@ -27,7 +28,7 @@ export class AppComponent implements OnInit {
   onSearch() {
     this.dataService.getData(`${this.url}${this.searchBox}`).subscribe(data => (this.jobs = data));
     this.searchBox = '';
-    document.activeElement.blur();
+    //document.activeElement.blur();
   }
 
 }
