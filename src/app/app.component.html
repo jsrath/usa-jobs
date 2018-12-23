@@ -1,26 +1,37 @@
-<mat-toolbar color="primary">
+<mat-toolbar class="mat-elevation-z6 header" color="primary" fullscreen>
   <mat-icon>work</mat-icon>
   <span>USA Jobs</span>
-  <input type="text" name="searchBox" [(ngModel)]="searchBox">
+  <form class="query-form" (ngSubmit)="onSearch()">
+    <mat-form-field class="searchBox">
+      <input id="searchTerm" matInput placeholder="Search Jobs" name="searchBox" [(ngModel)]="searchBox">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </form>
 </mat-toolbar>
 
-
-<mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="250px">
+<mat-grid-list class="grid" [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="250px">
   <mat-grid-tile *ngFor="let job of jobs">
     <mat-card>
       <mat-card-title class="mat-primary">{{job.position_title}}</mat-card-title>
       <mat-card-content>
-        <span *ngFor="let location of job.locations; let i = index">
-          | {{ i < 2 ? location : null }}</span> <mat-chip-list>
-            <mat-chip color="primary" selected *ngIf="job.locations.length > 2">+{{job.locations.length
-              -2}}
-              more locations
-            </mat-chip>
-            <mat-chip color="accent" selected>
-              <mat-icon>attach_money</mat-icon>{{job.minimum | currency:'USD':true:"1.0"}} - {{job.maximum |
-              currency:'USD':true:"1.0"}}
-            </mat-chip>
-            </mat-chip-list>
+        <div class="locations">
+          <span *ngFor="let location of job.locations; let i = index">
+            <span *ngIf="i < 2">
+              <mat-icon>place</mat-icon>{{location}}
+            </span>
+          </span>
+          <div *ngIf="job.locations.length > 2">
+            <mat-icon>place</mat-icon>+ {{job.locations.length
+            -2}}
+            more location(s)
+          </div>
+        </div>
+        <mat-chip-list>
+          <mat-chip color="accent" selected>
+            <mat-icon>attach_money</mat-icon>{{job.minimum | currency:"USD":"symbol":"1.0"}} - {{job.maximum |
+            currency:"USD":"symbol":"1.0"}}
+          </mat-chip>
+        </mat-chip-list>
 
       </mat-card-content>
     </mat-card>

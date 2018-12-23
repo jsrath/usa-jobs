@@ -10,6 +10,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatInputModule } from '@angular/material/input';
 
 import { AppComponent } from './app.component';
 
@@ -25,7 +26,8 @@ import { AppComponent } from './app.component';
     MatMenuModule,
     MatIconModule,
     MatToolbarModule,
-    MatChipsModule
+    MatChipsModule,
+    MatInputModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent],

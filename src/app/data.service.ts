@@ -19,11 +19,10 @@ export interface JobPost {
   providedIn: 'root',
 })
 export class DataService {
-  url = 'https://jobs.search.gov/jobs/search';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getData(): Observable<JobPost[]> {
-    return this.http.get<JobPost[]>(this.url);
+  getData(url): Observable<JobPost[]> {
+    return this.http.get<JobPost[]>(url);
   }
 }

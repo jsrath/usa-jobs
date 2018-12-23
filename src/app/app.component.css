@@ -1,4 +1,29 @@
 mat-card {
-  width: 80%;
+  width: 88%;
   min-height: 200px;
+}
+
+mat-card-title {
+  height: auto;
+  min-height: 4rem;
+  font-size: 20px;
+}
+
+.locations {
+  height: 80px;
+}
+
+.header {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  height: 100px;
+}
+
+.grid {
+  margin: 110px 0 50px;
+}
+
+.searchBox {
+  margin-left: 20px;
 }
