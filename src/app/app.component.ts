@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DataService } from './data.service';
 import { JobPost } from './data.service';
 
@@ -8,6 +8,7 @@ import { JobPost } from './data.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+  @ViewChild('searchInput') searchInput: ElementRef
   breakpoint: number;
   logo: string = '../assets/logo.svg'
   jobs: JobPost[];
@@ -25,10 +26,9 @@ export class AppComponent implements OnInit {
     this.breakpoint = event.target.innerWidth <= 900 ? 1 : 3;
   }
 
-  onSearch(event) {
+  onSearch() {
     this.dataService.getData(`${this.url}${this.searchBox}`).subscribe(data => (this.jobs = data));
     this.searchBox = '';
-    event.focus()
+    this.searchInput.nativeElement.blur();
   }
-
 }
