@@ -25,10 +25,10 @@ export class AppComponent implements OnInit {
     this.breakpoint = event.target.innerWidth <= 900 ? 1 : 3;
   }
 
-  onSearch() {
+  onSearch(event) {
     this.dataService.getData(`${this.url}${this.searchBox}`).subscribe(data => (this.jobs = data));
     this.searchBox = '';
-    //document.activeElement.blur();
+    event.focus()
   }
 
 }

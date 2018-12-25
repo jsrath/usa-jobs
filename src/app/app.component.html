@@ -1,9 +1,9 @@
 <mat-toolbar class="mat-elevation-z6 header" color="primary" fullscreen>
   <img width="100" [src]="logo">
-  <form class="query-form" (ngSubmit)="onSearch()">
+  <form tabindex="0" class="query-form" (ngSubmit)="$event.target.blur();onSearch($event.target);false">
     <mat-form-field class="searchBox">
-      <input id="searchTerm" matInput placeholder="Search Jobs" name="searchBox" [(ngModel)]="searchBox">
-      <mat-icon matSuffix>search</mat-icon>
+      <input #searchTerm matInput placeholder="Search Jobs" name="searchBox" [(ngModel)]="searchBox">
+      <mat-icon id="searchIcon" (click)="onSearch()" matSuffix>search</mat-icon>
     </mat-form-field>
   </form>
 </mat-toolbar>
