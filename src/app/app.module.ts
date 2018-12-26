@@ -13,9 +13,10 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatInputModule } from '@angular/material/input';
 
 import { AppComponent } from './app.component';
+import { TitlePipe } from './title.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, TitlePipe],
   imports: [
     BrowserModule,
     HttpClientModule,
