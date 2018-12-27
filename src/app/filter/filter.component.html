@@ -1,3 +1,4 @@
-<p>
-  <input type="text" (input)="filterResults()" [(ngModel)]="filterValue">
-</p>
+<mat-form-field id="filterField">
+  <input type="text" matInput placeholder="Filter Results" name="filterResults" (input)="filterResults()" [(ngModel)]="filterValue">
+  <mat-icon id="clearFilter" *ngIf="filterValue" (click)="clearFilter()" matSuffix>clear</mat-icon>
+</mat-form-field>

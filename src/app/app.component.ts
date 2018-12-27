@@ -48,4 +48,7 @@ export class AppComponent implements OnInit {
   setData() {
     return this.isFiltered ? this.filtered : this.jobs;
   }
+  clearFilter() {
+    return (this.isFiltered = false);
+  }
 }

@@ -8,9 +8,17 @@ import { Component, Output, EventEmitter } from '@angular/core';
 export class FilterComponent {
   @Output()
   onFilter = new EventEmitter();
+
+  @Output()
+  onClearFilter = new EventEmitter();
+
   filterValue;
 
   filterResults() {
     this.onFilter.emit(this.filterValue);
+  }
+  clearFilter() {
+    this.filterValue = '';
+    this.onClearFilter.emit();
   }
 }
