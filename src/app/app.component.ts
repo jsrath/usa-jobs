@@ -35,6 +35,7 @@ export class AppComponent implements OnInit {
   }
 
   onSearch() {
+    this.isFiltered = false;
     this.dataService.getData(`${this.url}${this.searchBox}`).subscribe(data => (this.jobs = data));
     this.searchBox = '';
     this.searchInput.nativeElement.blur();

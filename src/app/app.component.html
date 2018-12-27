@@ -13,7 +13,7 @@
   <mat-grid-tile *ngFor="let job of setData()">
     <mat-card>
       <mat-card-header>
-        <mat-card-title>{{job.position_title}}</mat-card-title>
+        <mat-card-title>{{job.position_title | title}}</mat-card-title>
       </mat-card-header>
       <hr>
       <mat-card-content>
