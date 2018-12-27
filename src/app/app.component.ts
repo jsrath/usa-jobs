@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output } from '@angular/core';
 import { DataService } from './data.service';
 import { JobPost } from './data.service';
 
@@ -8,10 +8,15 @@ import { JobPost } from './data.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  @ViewChild('searchInput') searchInput: ElementRef;
+  @ViewChild('searchInput')
+  searchInput: ElementRef;
+
+  @Output()
+  jobs: JobPost[];
+
   breakpoint: number;
   logo: string = '../assets/logo.svg';
-  jobs: JobPost[];
+
   searchBox: string;
   url: string = 'https://jobs.search.gov/jobs/search.json?size=50&query=';
 
@@ -30,5 +35,9 @@ export class AppComponent implements OnInit {
     this.dataService.getData(`${this.url}${this.searchBox}`).subscribe(data => (this.jobs = data));
     this.searchBox = '';
     this.searchInput.nativeElement.blur();
+  }
+
+  onFilter(value) {
+    this.jobs = this.jobs.filter(job => job.position_title.includes(value));
   }
 }

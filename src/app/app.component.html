@@ -6,6 +6,7 @@
       <mat-icon type="submit" id="searchIcon" matSuffix>search</mat-icon>
     </mat-form-field>
   </form>
+  <app-filter (onFilter)="onFilter($event)"></app-filter>
 </mat-toolbar>
 
 <mat-grid-list class="grid" [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="250px">

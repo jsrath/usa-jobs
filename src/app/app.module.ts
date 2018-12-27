@@ -14,9 +14,10 @@ import { MatInputModule } from '@angular/material/input';
 
 import { AppComponent } from './app.component';
 import { TitlePipe } from './title.pipe';
+import { FilterComponent } from './filter/filter.component';
 
 @NgModule({
-  declarations: [AppComponent, TitlePipe],
+  declarations: [AppComponent, TitlePipe, FilterComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
