@@ -10,7 +10,7 @@
 </mat-toolbar>
 
 <mat-grid-list class="grid" [cols]="breakpoint" (window:resize)="onResize($event)" rowHeight="250px">
-  <mat-grid-tile *ngFor="let job of jobs">
+  <mat-grid-tile *ngFor="let job of setData()">
     <mat-card>
       <mat-card-header>
         <mat-card-title>{{job.position_title | title}}</mat-card-title>

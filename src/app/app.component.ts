@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Output } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, ViewChild, ElementRef, Output } from '@angular/core';
 import { DataService } from './data.service';
 import { JobPost } from './data.service';
 
@@ -13,7 +13,9 @@ export class AppComponent implements OnInit {
 
   @Output()
   jobs: JobPost[];
+  filtered: JobPost[];
 
+  isFiltered: boolean = false;
   breakpoint: number;
   logo: string = '../assets/logo.svg';
 
@@ -27,6 +29,7 @@ export class AppComponent implements OnInit {
     this.breakpoint = window.innerWidth <= 900 ? 1 : 3;
   }
 
+  ngOnChanges(changes: SimpleChanges): void {}
   onResize(event) {
     this.breakpoint = event.target.innerWidth <= 900 ? 1 : 3;
   }
@@ -38,6 +41,11 @@ export class AppComponent implements OnInit {
   }
 
   onFilter(value) {
-    this.jobs = this.jobs.filter(job => job.position_title.includes(value));
+    this.isFiltered = true;
+    this.filtered = this.jobs.filter(job => job.position_title.toLowerCase().includes(value.toLowerCase()));
+  }
+
+  setData() {
+    return this.isFiltered ? this.filtered : this.jobs;
   }
 }
