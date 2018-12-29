@@ -25,7 +25,13 @@ export class AppComponent implements OnInit {
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    this.dataService.getData(`${this.url} `).subscribe(data => (this.jobs = data));
+    this.dataService.getData(`${this.url} `).subscribe(
+      data => (this.jobs = data),
+      (error: Response) => {
+        alert('An error occured, please try again.');
+        console.log(error.status);
+      },
+    );
     this.breakpoint = window.innerWidth <= 900 ? 1 : 3;
   }
 

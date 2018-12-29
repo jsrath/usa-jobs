@@ -19,8 +19,7 @@ export interface JobPost {
   providedIn: 'root',
 })
 export class DataService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getData(url): Observable<JobPost[]> {
     return this.http.get<JobPost[]>(url);
