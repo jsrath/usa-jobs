@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { DataService } from './data.service';
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule, Routes } from '@angular/router';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
@@ -15,23 +17,32 @@ import { MatInputModule } from '@angular/material/input';
 import { AppComponent } from './app.component';
 import { TitlePipe } from './title.pipe';
 import { FilterComponent } from './filter/filter.component';
+import { HomeComponent } from './home/home.component';
+import { JobComponent } from './job/job.component';
+
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'job/:id', component: JobComponent },
+  { path: '**', component: HomeComponent },
+];
 
 @NgModule({
-  declarations: [AppComponent, TitlePipe, FilterComponent],
+  declarations: [AppComponent, TitlePipe, FilterComponent, HomeComponent, JobComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     NoopAnimationsModule,
+    RouterModule.forRoot(routes),
     MatCardModule,
     MatGridListModule,
     MatMenuModule,
     MatIconModule,
     MatToolbarModule,
     MatChipsModule,
-    MatInputModule
+    MatInputModule,
   ],
   providers: [DataService],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

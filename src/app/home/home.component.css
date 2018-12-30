@@ -1,0 +1,41 @@
+mat-card {
+  width: 88%;
+  min-height: 200px;
+}
+
+mat-card-header {
+  position: relative;
+  min-height: 3.5em;
+  height: auto;
+}
+
+mat-card-title {
+  font-size: 20px;
+  position: absolute;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.locations {
+  height: 80px;
+}
+
+.header {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  height: 100px;
+}
+
+.grid {
+  margin: 110px 0 50px;
+}
+
+.searchBox {
+  margin-left: 20px;
+}
+
+#searchIcon {
+  cursor: pointer;
+}

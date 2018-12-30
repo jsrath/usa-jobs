@@ -19,9 +19,14 @@ export interface JobPost {
   providedIn: 'root',
 })
 export class DataService {
+  url: string;
   constructor(private http: HttpClient) {}
 
   getData(url): Observable<JobPost[]> {
+    this.url = url;
     return this.http.get<JobPost[]>(url);
+  }
+  getCurrentUrl() {
+    return this.url;
   }
 }
