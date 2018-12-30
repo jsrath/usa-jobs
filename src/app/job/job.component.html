@@ -1,5 +1,17 @@
 <div *ngFor="let job of jobs">
-  <div *ngIf="job.id === param">
-    {{job.id}}
-  </div>
+  <mat-card *ngIf="job.id === param">
+    <mat-card-header>
+      <mat-card-title>{{job.position_title}}</mat-card-title>
+    </mat-card-header>
+    <hr>
+    <mat-card-content>
+      <p>Organization: {{job.organization_name}}</p>
+      <p>Minimum Salary: {{job.minimum}}</p>
+      <p>Maximum Salary: {{job.maximum}}</p>
+      <p>Job Posted: {{job.start_date}}</p>
+      <p>Job Deadline: {{job.end_date}}</p>
+      <p>Job Location(s): {{job.locations}}</p>
+      <p>More Information: {{job.url}}</p>
+    </mat-card-content>
+  </mat-card>
 </div>
