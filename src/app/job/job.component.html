@@ -6,8 +6,24 @@
     <hr>
     <mat-card-content>
       <p>Organization: {{job.organization_name}}</p>
-      <p>Minimum Salary: {{job.minimum}}</p>
-      <p>Maximum Salary: {{job.maximum}}</p>
+      <p>Minimum Salary
+        <ng-container *ngIf="job.rate_interval_code ==='PH'; else perAnnum">
+          <span>(Per Hour) :</span>
+        </ng-container>
+        <ng-template #perAnnum>
+          <span>(Per Year) :</span>
+        </ng-template>
+        {{job.minimum | number}}
+      </p>
+      <p>Maximum Salary
+        <ng-container *ngIf="job.rate_interval_code ==='PH'; else perAnnum">
+          <span>(Per Hour) :</span>
+        </ng-container>
+        <ng-template #perAnnum>
+          <span>(Per Year) :</span>
+        </ng-template>
+        {{job.maximum | number}}
+      </p>
       <p>Job Posted: {{job.start_date}}</p>
       <p>Job Deadline: {{job.end_date}}</p>
       <p>Job Location(s): {{job.locations}}</p>

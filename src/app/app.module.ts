@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppComponent } from './app.component';
 import { TitlePipe } from './title.pipe';
@@ -41,6 +42,7 @@ const routes: Routes = [
     MatToolbarModule,
     MatChipsModule,
     MatInputModule,
+    MatButtonModule,
   ],
   providers: [DataService],
   bootstrap: [AppComponent],
