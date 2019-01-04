@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { DataService } from '../data.service';
 import { JobPost } from '../data.service';
@@ -19,9 +19,17 @@ export class JobComponent implements OnInit, OnChanges {
   jobs: JobPost[];
 
   ngOnInit(): void {
-    this.url = this.dataService.getCurrentUrl();
-    this.dataService.getData(`${this.url} `).subscribe(data => (this.jobs = data));
+    this.dataService.getDataBackup().subscribe(data => (this.jobs = data));
   }
 
-  ngOnChanges(changes: SimpleChanges): void {}
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.jobs);
+  }
+
+  /*   ngAfterViewInit() {
+    this.jobs && localStorage.setItem('jobs', JSON.stringify(this.jobs));
+    if (!this.jobs) {
+      this.jobs = JSON.parse(localStorage.getItem('jobs'));
+    }
+  } */
 }

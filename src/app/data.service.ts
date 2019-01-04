@@ -21,21 +21,27 @@ export interface JobPost {
 export class DataService {
   url: string;
   search: string;
+  dataBackup: Observable<JobPost[]>;
+
   constructor(private http: HttpClient) {}
 
   getData(baseUrl, search?): Observable<JobPost[]> {
     this.url = baseUrl;
     if (search) {
       this.search = search;
+      this.dataBackup = this.http.get<JobPost[]>(`${baseUrl}${search}`);
       return this.http.get<JobPost[]>(`${baseUrl}${search}`);
     } else {
+      this.dataBackup = this.http.get<JobPost[]>(`${baseUrl}`);
       return this.http.get<JobPost[]>(`${baseUrl}`);
     }
   }
-  getCurrentUrl() {
-    return this.search ? `${this.url}${this.search}` : this.url;
-  }
+
   getSearch() {
     return this.search;
+  }
+
+  getDataBackup(): Observable<JobPost[]> {
+    return this.dataBackup;
   }
 }
