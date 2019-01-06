@@ -3,31 +3,52 @@
     <mat-card-header>
       <mat-card-title>{{job.position_title}}</mat-card-title>
     </mat-card-header>
-    <hr>
+    <mat-divider></mat-divider>
     <mat-card-content>
-      <p>Organization: {{job.organization_name}}</p>
-      <p>Minimum Salary
-        <ng-container *ngIf="job.rate_interval_code ==='PH'; else perAnnum">
-          <span>(Per Hour) :</span>
-        </ng-container>
-        <ng-template #perAnnum>
-          <span>(Per Year) :</span>
-        </ng-template>
-        {{job.minimum | number}}
-      </p>
-      <p>Maximum Salary
-        <ng-container *ngIf="job.rate_interval_code ==='PH'; else perAnnum">
-          <span>(Per Hour) :</span>
-        </ng-container>
-        <ng-template #perAnnum>
-          <span>(Per Year) :</span>
-        </ng-template>
-        {{job.maximum | number}}
-      </p>
-      <p>Job Posted: {{job.start_date}}</p>
-      <p>Job Deadline: {{job.end_date}}</p>
-      <p>Job Location(s): {{job.locations.join(' | ')}}</p>
-      <p>More Information: <a [href]="job.url" target="_blank" rel="noopener noreferrer">{{job.url}}</a></p>
+      <table mat-table class="mat-elevation-z8">
+        <tr>
+          <td class="description">Organization:</td>
+          <td>{{job.organization_name}}</td>
+        </tr>
+        <tr>
+          <td class="description">Minimum Salary
+            <ng-container *ngIf="job.rate_interval_code ==='PH'; else perAnnum">
+              <span>(Per Hour) :</span>
+            </ng-container>
+            <ng-template #perAnnum>
+              <span>(Per Year) :</span>
+            </ng-template>
+          </td>
+          <td>{{job.minimum | number}}</td>
+        </tr>
+        <tr>
+          <td class="description">Maximum Salary
+            <ng-container *ngIf="job.rate_interval_code ==='PH'; else perAnnum">
+              <span>(Per Hour) :</span>
+            </ng-container>
+            <ng-template #perAnnum>
+              <span>(Per Year) :</span>
+            </ng-template>
+          </td>
+          <td>{{job.maximum | number}}</td>
+        </tr>
+        <tr>
+          <td class="description">Job Posted:</td>
+          <td> {{job.start_date}}</td>
+        </tr>
+        <tr>
+          <td class="description">Job Deadline:</td>
+          <td>{{job.end_date}}</td>
+        </tr>
+        <tr>
+          <td class="description">Job Location(s):</td>
+          <td>{{job.locations.join(' | ')}}</td>
+        </tr>
+        <tr>
+          <td class="description">More Information:</td>
+          <td><a class="jobLink" [href]="job.url" target="_blank" rel="noopener noreferrer">{{job.url}}</a></td>
+        </tr>
+      </table>
     </mat-card-content>
   </mat-card>
 </div>

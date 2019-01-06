@@ -14,7 +14,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-
+import { MatDividerModule } from '@angular/material/divider';
 import { AppComponent } from './app.component';
 import { TitlePipe } from './title.pipe';
 import { FilterComponent } from './filter/filter.component';
@@ -43,6 +43,7 @@ const routes: Routes = [
     MatChipsModule,
     MatInputModule,
     MatButtonModule,
+    MatDividerModule,
   ],
   providers: [DataService],
   bootstrap: [AppComponent],
