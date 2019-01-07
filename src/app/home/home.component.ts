@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   isFiltered: boolean = false;
   breakpoint: number;
-  logo: string = '../assets/logo.svg';
+  logo: string = 'assets/logo.svg';
 
   searchBox: string = this.dataService.getSearch();
   baseUrl: string = 'https://jobs.search.gov/jobs/search.json?size=50&query=';
