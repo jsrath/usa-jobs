@@ -1,7 +1,7 @@
 <div *ngFor="let job of jobs">
-  <mat-card *ngIf="job.id === param">
+  <mat-card *ngIf="job.MatchedObjectDescriptor.PositionID === param">
     <mat-card-header>
-      <mat-card-title>{{job.position_title}}</mat-card-title>
+      <mat-card-title>{{job.MatchedObjectDescriptor.PositionTitle}}</mat-card-title>
     </mat-card-header>
     <mat-divider></mat-divider>
     <mat-card-content>
@@ -11,61 +11,67 @@
             <mat-icon>domain</mat-icon>
             Organization:
           </td>
-          <td>{{job.organization_name}}</td>
+          <td>{{job.MatchedObjectDescriptor.OrganizationName}}</td>
         </tr>
         <tr>
           <td class="description">
             <mat-icon>arrow_downward</mat-icon>
             Minimum Salary
-            <ng-container *ngIf="job.rate_interval_code ==='PH'; else perAnnum">
+            <ng-container
+              *ngIf="job.MatchedObjectDescriptor.PositionRemuneration[0].RateIntervalCode ==='Per Hour'; else perAnnum">
               <span>(Per Hour) :</span>
             </ng-container>
             <ng-template #perAnnum>
               <span>(Per Year) :</span>
             </ng-template>
           </td>
-          <td>{{job.minimum | number}}</td>
+          <td>{{job.MatchedObjectDescriptor.PositionRemuneration[0].MinimumRange | number}}</td>
         </tr>
         <tr>
           <td class="description">
             <mat-icon>arrow_upward</mat-icon>
             Maximum Salary
-            <ng-container *ngIf="job.rate_interval_code ==='PH'; else perAnnum">
+            <ng-container
+              *ngIf="job.MatchedObjectDescriptor.PositionRemuneration[0].RateIntervalCode ==='Per Hour'; else perAnnum">
               <span>(Per Hour) :</span>
             </ng-container>
             <ng-template #perAnnum>
               <span>(Per Year) :</span>
             </ng-template>
           </td>
-          <td>{{job.maximum | number}}</td>
+          <td>{{job.MatchedObjectDescriptor.PositionRemuneration[0].MaximumRange | number}}</td>
         </tr>
         <tr>
           <td class="description">
             <mat-icon>transit_enterexit</mat-icon>
             Job Posted:
           </td>
-          <td> {{job.start_date}}</td>
+          <td> {{job.MatchedObjectDescriptor.PositionStartDate}}</td>
         </tr>
         <tr>
           <td class="description">
             <mat-icon>exit_to_app</mat-icon>
             Job Deadline:
           </td>
-          <td>{{job.end_date}}</td>
+          <td>{{job.MatchedObjectDescriptor.PositionEndDate}}</td>
         </tr>
         <tr>
           <td class="description">
             <mat-icon>location_on</mat-icon>
             Job Location(s):
           </td>
-          <td>{{job.locations.join(' | ')}}</td>
+          <td>
+            <p *ngFor="let location of job.MatchedObjectDescriptor.PositionLocation">
+              {{location.LocationName}}
+            </p>
+          </td>
         </tr>
         <tr>
           <td class="description">
             <mat-icon>info</mat-icon>
             More Information:
           </td>
-          <td><a class="jobLink" [href]="job.url" target="_blank" rel="noopener noreferrer">{{job.url}}</a></td>
+          <td><a class="jobLink" [href]="job.MatchedObjectDescriptor.PositionURI" target="_blank" rel="noopener noreferrer">{{job.MatchedObjectDescriptor.PositionURI}}</a></td>
         </tr>
       </table>
     </mat-card-content>

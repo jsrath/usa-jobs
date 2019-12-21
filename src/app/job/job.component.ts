@@ -1,36 +1,43 @@
-import { Component, OnInit, OnChanges, SimpleChanges, AfterViewChecked } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { DataService } from '../data.service';
-import { JobPost } from '../data.service';
+import { Component, OnInit, AfterViewChecked } from "@angular/core";
+import { ActivatedRoute, Params } from "@angular/router";
+import { DataService } from "../data.service";
+import { JobPost } from "../data.service";
+import { tap } from "rxjs/operators";
+import { Observable, Subscription } from "rxjs";
 
 @Component({
-  selector: 'app-job',
-  templateUrl: './job.component.html',
-  styleUrls: ['./job.component.css'],
+  selector: "app-job",
+  templateUrl: "./job.component.html",
+  styleUrls: ["./job.component.css"]
 })
-export class JobComponent implements OnInit, OnChanges, AfterViewChecked {
-  constructor(private route: ActivatedRoute, private router: Router, private dataService: DataService) {
-    this.route.params.subscribe((params: Params) => {
-      this.param = params.id;
-    });
-  }
+export class JobComponent implements OnInit, AfterViewChecked {
   param: string;
-  url: string;
-  jobs: JobPost[];
+  jobs: any;
+  dataBackup: Observable<any> | undefined;
 
-  ngOnInit(): void {
-    if (this.dataService.getDataBackup()) {
-      this.dataService.getDataBackup().subscribe(data => (this.jobs = data));
-    } else {
-      this.jobs = JSON.parse(localStorage.getItem('jobs'));
-    }
-  }
+  constructor(
+    private route: ActivatedRoute,
+    private dataService: DataService
+  ) { }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    //console.log(this.jobs);
+  ngOnInit() {
+    this.getParam();
+    this.dataBackup = this.dataService.getDataBackup();
+
+    this.dataBackup 
+    ? this.dataBackup.pipe(tap(data => this.jobs = data.SearchResult.SearchResultItems)).subscribe()
+    : this.jobs = JSON.parse(localStorage.getItem("jobs"))
   }
 
   ngAfterViewChecked() {
-    this.jobs && localStorage.setItem('jobs', JSON.stringify(this.jobs));
+    this.jobs && localStorage.setItem("jobs", JSON.stringify(this.jobs));
+  }
+
+  getParam() {
+    this.route.params.subscribe((params: Params) => (this.param = params.id));
+  }
+
+  parseData(jobs) {
+    return this.jobs.map(job => job.MatchedObjectDescriptor);
   }
 }

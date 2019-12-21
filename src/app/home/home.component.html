@@ -13,29 +13,28 @@
   <mat-grid-tile *ngFor="let job of setData()">
     <mat-card>
       <mat-card-header>
-        <mat-card-title>{{job.position_title | title}}</mat-card-title>
+        <mat-card-title>{{job.PositionTitle | title}}</mat-card-title>
       </mat-card-header>
       <hr>
-      <mat-card-content>
+     <mat-card-content>
         <div class="locations">
-          <span *ngFor="let location of job.locations; let i = index">
+          <span *ngFor="let location of job.PositionLocation; let i = index">
             <span *ngIf="i < 2">
-              <mat-icon class="mat-accent">place</mat-icon>{{location}}
+              <mat-icon class="mat-accent">place</mat-icon>{{location.LocationName}}
             </span>
           </span>
-          <div *ngIf="job.locations.length > 2">
-            <mat-icon class="mat-accent">place</mat-icon>+ {{job.locations.length
-            -2}}
+          <div *ngIf="job.PositionLocation.length > 2">
+            <mat-icon class="mat-accent">place</mat-icon>+ {{job.PositionLocation.length -2}}
             more location(s)
           </div>
         </div>
         <mat-chip-list>
           <mat-chip color="accent" selected>
-            <mat-icon>attach_money</mat-icon>{{job.minimum | currency:"USD":"symbol":"1.0"}} - {{job.maximum |
+            <mat-icon>attach_money</mat-icon>{{job.PositionRemuneration[0].MinimumRange | currency:"USD":"symbol":"1.0"}} - {{job.PositionRemuneration[0].MaximumRange |
             currency:"USD":"symbol":"1.0"}}
           </mat-chip>
         </mat-chip-list>
-        <button mat-raised-button color="primary" routerLink="/job/{{job.id}}">Job Details</button>
+       <button class="details-button" mat-raised-button color="primary" routerLink="/job/{{job.PositionID}}">Job Details</button>
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>

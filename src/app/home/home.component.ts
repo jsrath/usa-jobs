@@ -1,56 +1,60 @@
-import { Component, OnInit, SimpleChanges, ViewChild, ElementRef, Output, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output } from '@angular/core';
 import { DataService } from '../data.service';
 import { JobPost } from '../data.service';
+import { tap } from "rxjs/operators";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
   @ViewChild('searchInput')
   searchInput: ElementRef;
 
   @Output()
-  jobs: JobPost[];
+  jobs: any;
   filtered: JobPost[];
-
-  isFiltered: boolean = false;
+  isFiltered = false;
   breakpoint: number;
-  logo: string = 'assets/logo.svg';
+  logo = 'assets/logo.svg';
 
   searchBox: string = this.dataService.getSearch();
-  baseUrl: string = 'https://jobs.search.gov/jobs/search.json?size=50&query=';
+  baseUrl: string = 'https://data.usajobs.gov/api/Search?PositionTitle=';
 
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    this.dataService.getData(this.baseUrl, this.searchBox).subscribe(data => (this.jobs = data));
-    this.breakpoint = window.innerWidth <= 900 ? 1 : 3;
+    this.onSearch();
+    this.onResize();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {}
-
-  ngOnDestroy(): void {}
-  onResize(event) {
-    this.breakpoint = event.target.innerWidth <= 900 ? 1 : 3;
+  onResize(event?) {
+    this.breakpoint = event
+    ? event.target.innerWidth <= 900 ? 1 : 3
+    : window.innerWidth <= 900 ? 1 : 3;
   }
 
   onSearch() {
     this.isFiltered = false;
-    this.dataService.getData(this.baseUrl, this.searchBox).subscribe(data => (this.jobs = data));
+    this.dataService.getData(this.baseUrl, this.searchBox)
+    .pipe(tap(data => {
+      this.jobs = data.SearchResult.SearchResultItems.map(job => job.MatchedObjectDescriptor)
+    })).subscribe();
+    
     this.searchInput.nativeElement.blur();
   }
 
   onFilter(value) {
     this.isFiltered = true;
-    this.filtered = this.jobs.filter(job => job.position_title.toLowerCase().includes(value.toLowerCase()));
+    this.filtered = this.jobs.filter(job => job.PositionTitle.toLowerCase().includes(value.toLowerCase()));
   }
 
   setData() {
     return this.isFiltered ? this.filtered : this.jobs;
   }
+
   clearFilter() {
-    return (this.isFiltered = false);
+    this.isFiltered = false;
   }
 }

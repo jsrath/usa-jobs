@@ -1,14 +1,12 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-  name: 'title',
+  name: "title"
 })
 export class TitlePipe implements PipeTransform {
   transform(title: string): string {
-    if (title.length > 50) {
-      title = title.substring(0, 50);
-      return title.substring(0, title.lastIndexOf(' '));
-    }
-    return title;
+    return title.length > 50
+      ? title.substring(0, title.slice(0, 50).lastIndexOf(" "))
+      : title;
   }
 }
