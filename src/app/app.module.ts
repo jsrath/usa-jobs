@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { DataService } from './data.service';
+import { DataService } from './services/data.service';
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
@@ -16,10 +16,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { AppComponent } from './app.component';
-import { TitlePipe } from './title.pipe';
-import { FilterComponent } from './filter/filter.component';
-import { HomeComponent } from './home/home.component';
-import { JobComponent } from './job/job.component';
+import { TitlePipe } from './pipes/title.pipe';
+import { FilterComponent } from './components/filter/filter.component';
+import { HomeComponent } from './components/home/home.component';
+import { JobComponent } from './components/job/job.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },

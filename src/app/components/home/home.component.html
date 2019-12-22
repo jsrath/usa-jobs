@@ -1,0 +1,40 @@
+<mat-toolbar #grid class="mat-elevation-z6 header" color="primary" fullscreen>
+  <img width="100" [src]="logo">
+  <form class="query-form" (ngSubmit)="onSearch()">
+    <mat-form-field class="search-box">
+      <input #searchInput matInput placeholder="Search Jobs" name="searchBox" [(ngModel)]="searchBox">
+      <mat-icon type="submit" class="search-icon" matSuffix>search</mat-icon>
+    </mat-form-field>
+  </form>
+  <app-filter (onClearFilter)="clearFilter()" (onFilter)="onFilter($event)"></app-filter>
+</mat-toolbar>
+
+<mat-grid-list class="grid" [cols]="breakpoint" (window:resize)="onResize($event.target)" rowHeight="295px">
+  <mat-grid-tile *ngFor="let job of setData()">
+    <mat-card class="mat-card">
+      <mat-card-header class="mat-card-header">
+        <mat-card-title class="mat-card-title">{{job.PositionTitle | title}}</mat-card-title>
+      </mat-card-header>
+      <hr>
+     <mat-card-content>
+        <div class="locations">
+          <span *ngFor="let location of job.PositionLocation; let i = index">
+            <span *ngIf="i < 2"><mat-icon class="mat-accent">place</mat-icon>{{location.LocationName}}</span>
+          </span>
+          <p class="more-locations" *ngIf="job.PositionLocation.length > 2">
+            <mat-icon class="mat-accent">place</mat-icon>
+            + {{job.PositionLocation.length -2}} more location(s)
+          </p>
+        </div>
+        <mat-chip-list>
+          <mat-chip color="accent" selected>
+            <mat-icon>attach_money</mat-icon>
+            {{job.PositionRemuneration[0].MinimumRange | currency:"USD":"symbol":"1.0"}} - 
+            {{job.PositionRemuneration[0].MaximumRange | currency:"USD":"symbol":"1.0"}}
+          </mat-chip>
+        </mat-chip-list>
+       <button class="details-button" mat-raised-button color="primary" routerLink="/job/{{job.PositionID}}">Job Details</button>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

@@ -1,0 +1,88 @@
+<div *ngFor="let job of jobs">
+  <mat-card class="mat-card" *ngIf="job.PositionID === param">
+    <mat-card-header class="mat-card-header">
+      <mat-card-title class="mat-card-title">{{job.PositionTitle}}</mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content class="mat-card-content">
+      <table mat-table class="mat-elevation-z8">
+        <tr>
+          <td class="description">
+            <mat-icon class="mat-icon">domain</mat-icon>
+            Organization:
+          </td>
+          <td>{{job.OrganizationName}}</td>
+        </tr>
+        <tr>
+          <td class="description">
+            <mat-icon class="mat-icon">arrow_downward</mat-icon>
+            <span>Minimum Salary&nbsp;</span>
+            <ng-container *ngIf="job.PositionRemuneration[0].RateIntervalCode ==='Per Hour'; else perAnnum">
+              <span>(Per Hour) :</span>
+            </ng-container>
+            <ng-template #perAnnum>
+              <span>(Per Year) :</span>
+            </ng-template>
+          </td>
+          <td>{{job.PositionRemuneration[0].MinimumRange | number}}</td>
+        </tr>
+        <tr>
+          <td class="description">
+            <mat-icon class="mat-icon">arrow_upward</mat-icon>
+            <span>Maximum Salary&nbsp;</span>
+            <ng-container
+              *ngIf="job.PositionRemuneration[0].RateIntervalCode ==='Per Hour'; else perAnnum">
+              <span>(Per Hour) :</span>
+            </ng-container>
+            <ng-template #perAnnum>
+              <span>(Per Year) :</span>
+            </ng-template>
+          </td>
+          <td>{{job.PositionRemuneration[0].MaximumRange | number}}</td>
+        </tr>
+        <tr>
+          <td class="description">
+            <mat-icon class="mat-icon">transit_enterexit</mat-icon>
+            Job Posted:
+          </td>
+          <td> {{job.PublicationStartDate}}</td>
+        </tr>
+        <tr>
+          <td class="description">
+            <mat-icon class="mat-icon">exit_to_app</mat-icon>
+            Application Deadline:
+          </td>
+          <td>{{job.ApplicationCloseDate}}</td>
+        </tr>
+        <tr>
+          <td class="description">
+            <mat-icon class="mat-icon">location_on</mat-icon>
+            Job Location(s):
+          </td>
+          <td>
+            <p *ngFor="let location of job.PositionLocation">
+              {{location.LocationName}}
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="description">
+            <mat-icon class="mat-icon">assignment</mat-icon>
+            Qualifications:
+          </td>
+          <td>
+            <p>{{job.QualificationSummary}}</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="description">
+            <mat-icon class="mat-icon">info</mat-icon>
+            More Information:
+          </td>
+          <td><a class="job-link" [href]="job.PositionURI" target="_blank" rel="noopener noreferrer">{{job.PositionURI}}</a></td>
+        </tr>
+      </table>
+      <button class="back-button" color="primary" mat-raised-button routerLink="/">Back to Jobs</button>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -6,17 +6,18 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./filter.component.css'],
 })
 export class FilterComponent {
+  filterValue: string;
+
   @Output()
   onFilter = new EventEmitter();
 
   @Output()
   onClearFilter = new EventEmitter();
 
-  filterValue;
-
   filterResults() {
     this.onFilter.emit(this.filterValue);
   }
+
   clearFilter() {
     this.filterValue = '';
     this.onClearFilter.emit();

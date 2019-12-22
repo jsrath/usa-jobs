@@ -1,15 +1,15 @@
-mat-card {
+.mat-card {
   width: 88%;
   min-height: 220px;
 }
 
-mat-card-header {
+.mat-card-header {
   position: relative;
   min-height: 3.5em;
   height: auto;
 }
 
-mat-card-title {
+.mat-card-title {
   font-size: 20px;
   position: absolute;
   bottom: 0;
@@ -32,14 +32,19 @@ mat-card-title {
   margin: 110px 0 80px;
 }
 
-.searchBox {
+.search-box {
   margin-left: 20px;
 }
 
-#searchIcon {
+.search-icon {
   cursor: pointer;
 }
 
-button {
+.details-button{
   margin-top: 20px;
+  cursor: pointer;
+}
+
+.more-locations {
+  margin: 0;
 }

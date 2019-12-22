@@ -1,7 +1,7 @@
-#clearFilter {
+.clearFilter {
   cursor: pointer;
 }
 
-#filterField {
+.filterField {
   margin-left: 50px;
 }
