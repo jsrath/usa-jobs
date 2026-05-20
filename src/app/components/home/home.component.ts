@@ -47,8 +47,14 @@ export class HomeComponent implements OnInit {
     this.dataService
       .getData(this.baseUrl, this.searchBox)
       .pipe(
-        tap((data: ApiResponse) => { 
-          this.jobs = data.SearchResult.SearchResultItems.map((job: ResultItem) => job.MatchedObjectDescriptor);
+        tap((data: ApiResponse) => {
+          const items =
+            data &&
+            data.SearchResult &&
+            data.SearchResult.SearchResultItems
+              ? data.SearchResult.SearchResultItems
+              : [];
+          this.jobs = items.map((job: ResultItem) => job.MatchedObjectDescriptor);
         })).subscribe();
 
     this.searchInput.nativeElement.blur();

@@ -26,10 +26,10 @@
             + {{job.PositionLocation.length -2}} more location(s)
           </p>
         </div>
-        <mat-chip-list>
+        <mat-chip-list *ngIf="job.PositionRemuneration && job.PositionRemuneration.length">
           <mat-chip color="accent" selected>
             <mat-icon>attach_money</mat-icon>
-            {{job.PositionRemuneration[0].MinimumRange | currency:"USD":"symbol":"1.0"}} - 
+            {{job.PositionRemuneration[0].MinimumRange | currency:"USD":"symbol":"1.0"}} -
             {{job.PositionRemuneration[0].MaximumRange | currency:"USD":"symbol":"1.0"}}
           </mat-chip>
         </mat-chip-list>

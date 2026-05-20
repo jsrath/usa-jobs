@@ -14,18 +14,29 @@ export class DataService {
   dataBackup: Observable<ApiResponse>;
   resultsPerPage = config.resultsPerPage;
   authKey = config.authKey;
-  headers = { headers: new HttpHeaders({ 'Authorization-Key': this.authKey }) }
+  headers = {
+    headers: new HttpHeaders({
+      'Authorization-Key': this.authKey,
+      Host: 'data.usajobs.gov',
+      'User-Agent': 'jeremy@jsrath.com',
+    }),
+  };
 
   constructor(private http: HttpClient) { }
 
   getData(baseUrl, search?): Observable<ApiResponse> {
     this.url = baseUrl;
-    if (search !== undefined) {
-      this.search = search;
-      this.dataBackup = this.http.get<ApiResponse>(`${baseUrl}${search}&${this.resultsPerPage}`, this.headers);
+    const params = [this.resultsPerPage];
+    const keyword = search && typeof search === 'string' ? search.trim() : '';
+
+    if (keyword) {
+      this.search = keyword;
+      params.unshift(`Keyword=${encodeURIComponent(keyword)}`);
     } else {
-      this.dataBackup = this.http.get<ApiResponse>(`${baseUrl}&${this.resultsPerPage}`, this.headers);
+      this.search = '';
     }
+
+    this.dataBackup = this.http.get<ApiResponse>(`${baseUrl}${params.join('&')}`, this.headers);
     return this.dataBackup;
   }
 
